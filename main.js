@@ -15,9 +15,16 @@ const buttonText = [
 async function fetchJoke() {
     const response = await fetch("https://icanhazdadjoke.com", 
     { headers: 
-        {Accept: 'application/json',}});
+        {Accept: 'application/json'}});
     //turning it into something that is readable
-    const joke = await response.json()
-    console.log(response)
+    const data = await response.json()
+    return data;
 }
-fetchJoke()
+
+
+async function handleClick(){
+    const {joke} = await fetchJoke();
+    jokeHolder.textContent = joke;
+}
+
+jokeButton.addEventListener("click", handleClick)
